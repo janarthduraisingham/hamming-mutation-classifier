@@ -1,6 +1,15 @@
 library(shiny)
 library(bslib)
 
-test_sequence <- 'AAAAAAAA'
+ui <- page_fluid()
 
-reference_sequence <- 'ATGCATGC'
+server <- function(input, output) {
+  
+  test_sequence <- 'AAAAAAAA'
+           
+  reference_sequence <- 'ATGCATGC'
+}
+
+shinyApp(ui = ui,
+         server = server)
+
