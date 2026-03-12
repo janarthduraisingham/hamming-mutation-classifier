@@ -55,7 +55,3 @@ hypothesis_test <- function(test_sequence,
   return(p_value)
   
 }
-
-hypothesis_test(test_sequence = 'AAABBBBB',
-                reference_sequence = 'AAAAAAAA',
-                hamming_distance_function = hamming_distance)
