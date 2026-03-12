@@ -12,7 +12,7 @@ hamming_distance <- function(seq_1, seq_2) {
   
   comparison = pmap(list(list_seq_1,
                       list_seq_2),
-                    ~ .x == .y)
+                    ~ .x != .y)
   
   hamming_distance = sum(unlist(comparison))
   
