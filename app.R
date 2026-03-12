@@ -1,7 +1,11 @@
 library(shiny)
 library(bslib)
 
-ui <- page_fluid()
+ui <- fluidPage(
+  
+  titlePanel("Hamming Distance Mutation Classifier")
+  
+)
 
 server <- function(input, output) {
   
