@@ -1,10 +1,20 @@
 library(shiny)
 library(bslib)
 
-ui <- fluidPage(
+ui <- page_fluid(
   
-  titlePanel("Hamming Distance Mutation Classifier")
+  titlePanel("Hamming Distance Mutation Classifier"),
   
+  card(
+    card_header("Setup")
+  ),
+  
+  card(
+    card_header("Run Hypothesis Test"),
+    
+    actionButton("run", "Run")
+    
+  )
 )
 
 server <- function(input, output) {
@@ -17,9 +27,11 @@ server <- function(input, output) {
            
   reference_sequence <- 'ATGCATGC'
   
-  hypothesis_test(test_sequence = 'AAABBBBB',
+  observeEvent(input$run,
+               hypothesis_test(test_sequence = 'AAABBBBB',
                   reference_sequence = 'AAAAAAAA',
                   hamming_distance_function = hamming_distance)
+  )
   
 }
 
