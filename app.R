@@ -16,14 +16,15 @@ ui <- page_fluid(
     
   ),
   
+  layout_columns(
   card(
     
-    card_header("Results")
+    card_header("Results intuitively phrased")
     
   ),
   
   card(
-    card_header("Log"),
+    card_header("Results"),
     
     textOutput("run_complete"),
     textOutput("test_sequence"),
@@ -34,6 +35,7 @@ ui <- page_fluid(
     textOutput("h1"),
     textOutput("p_value_message"),
     textOutput("conclusion")
+  )
   )
 )
 
