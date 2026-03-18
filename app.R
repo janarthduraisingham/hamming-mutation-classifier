@@ -29,6 +29,7 @@ ui <- page_fluid(
     textOutput("run_complete"),
     textOutput("test_sequence"),
     textOutput("reference_sequence"),
+    textOutput("sequence_length"),
     textOutput("distribution"),
     textOutput("single_mutation_probability"),
     textOutput("h0"),
@@ -53,6 +54,7 @@ server <- function(input, output) {
                                     h1 ='',
                                     test_sequence = '',
                                     reference_seqeunce = '',
+                                    sequence_length = '',
                                     conclusion = '')
   
   test_sequence <- 'AAAAAAAA'
@@ -73,6 +75,7 @@ server <- function(input, output) {
   output$h0 = renderText(reactive_values$h0)
   output$h1 = renderText(reactive_values$h1)
   output$conclusion = renderText(reactive_values$conclusion)
+  output$sequence_length = renderText(reactive_values$sequence_length)
   
   # Run Button
   observeEvent(input$run,
@@ -100,6 +103,7 @@ server <- function(input, output) {
                reactive_values$h0 = paste0("Null Hypothesis: The Hamming distance between the test sequence and the reference sequence follows a ", distribution, " distribution, with single independent mutation probability, ", single_mutation_probability)
                reactive_values$h1 = paste0("Alternative Hypothesis: The Hamming distance between the test sequence and the reference sequence does not follow a ", distribution, " distribution, with single independent mutation probability, ", single_mutation_probability)
                reactive_values$conclusion = paste0("Conclusion: ", conclusion, " the Null Hypothesis")
+               reactive_values$sequence_length = paste0("Sequence length: ", nchar(test_sequence))
                
                
                }
