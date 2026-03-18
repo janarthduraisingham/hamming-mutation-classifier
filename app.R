@@ -118,7 +118,7 @@ server <- function(input, output) {
                reactive_values$test_sequence = test_sequence
                #reactive_values$test_sequence_message_intu = paste0("Sequence we want to investigate: ", test_sequence)
                
-               reactive_values$reference_sequence = paste0("Reference sequence: ", reference_sequence)
+               reactive_values$reference_sequence = reference_sequence
                
                reactive_values$h0 = paste0("Null Hypothesis: The Hamming distance between the test sequence and the reference sequence follows a ", distribution, " distribution, with single independent mutation probability, ", single_mutation_probability)
                
