@@ -61,7 +61,7 @@ server <- function(input, output) {
   single_mutation_probability = 0.1
   
   # Print messages
-  output$test_sequence = renderText(paste0("Test sequence: ", reactive_values$test_sequence_message))
+  output$test_sequence_message = renderText(paste0("Test sequence: ", reactive_values$test_sequence_message))
   
   output$run_complete_message = renderText(reactive_values$run_complete_message)
   output$run_complete_message_intu = renderText(reactive_values$run_complete_message)
@@ -101,18 +101,26 @@ server <- function(input, output) {
                
                # Messages
                reactive_values$run_complete_message = 'Hypothesis test complete'
+               
                reactive_values$p_value = paste0("p value: ", format(p_value, scientific = F))
+               
                reactive_values$hamming_distance_distribution = paste0("Hamming distance distribution: ", distribution)
+               
                reactive_values$single_mutation_probability = paste0("Null Hypothesis single independent mutation probability: ", single_mutation_probability)
                
                reactive_values$test_sequence_message = paste0("Test sequence: ", test_sequence)
                reactive_values$test_sequence_message_intu = paste0("Sequence we want to investigate: ", test_sequence)
                
                reactive_values$reference_sequence_message = paste0("Reference sequence: ", reference_sequence)
+               
                reactive_values$h0 = paste0("Null Hypothesis: The Hamming distance between the test sequence and the reference sequence follows a ", distribution, " distribution, with single independent mutation probability, ", single_mutation_probability)
+               
                reactive_values$h1 = paste0("Alternative Hypothesis: The Hamming distance between the test sequence and the reference sequence does not follow a ", distribution, " distribution, with single independent mutation probability, ", single_mutation_probability)
+               
                reactive_values$conclusion = paste0("Conclusion: ", conclusion, " the Null Hypothesis")
+               
                reactive_values$test_statistic = paste0("Test statistic: ", test_statistic)
+               
                reactive_values$sequence_length = paste0("Sequence length: ", nchar(test_sequence))
                
                
