@@ -29,7 +29,8 @@ ui <- page_fluid(
     textOutput("single_mutation_probability_message_intu"),
     textOutput("h0_message_intu"),
     textOutput("h1_message_intu"),
-    textOutput("test_statistic_message_intu")
+    textOutput("test_statistic_message_intu"),
+    textOutput("p_value_message_intu")
 
     
   ),
@@ -78,7 +79,8 @@ server <- function(input, output) {
   output$run_complete_message = renderText(reactive_values$run_complete_message)
   output$run_complete_message_intu = renderText(reactive_values$run_complete_message)
   
-  output$p_value_message = renderText(reactive_values$p_value)
+  output$p_value_message = renderText(paste0("p value: ", reactive_values$p_value))
+  output$p_value_message_intu = renderText(paste0("Probability of observing a result at least as extreme as the test statistic, if the Null Hypothesis is true: ", reactive_values$p_value))
   
   output$distribution_message = renderText(paste0("Hamming distance distribution: ", reactive_values$hamming_distance_distribution))
   output$distribution_message_intu = renderText(paste0("Hamming distance distribution: ", reactive_values$hamming_distance_distribution))
@@ -124,7 +126,7 @@ server <- function(input, output) {
                # Messages
                reactive_values$run_complete_message = 'Hypothesis test complete'
                
-               reactive_values$p_value = paste0("p value: ", format(p_value, scientific = F))
+               reactive_values$p_value = format(p_value, scientific = F)
                
                reactive_values$hamming_distance_distribution = distribution
                
