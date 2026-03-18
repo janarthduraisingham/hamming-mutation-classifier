@@ -90,10 +90,10 @@ server <- function(input, output) {
   output$single_mutation_probability_message_intu = renderText(paste0("Null Hypothesis single independent mutation probability: ", reactive_values$single_mutation_probability))
   
   output$h0_message = renderText(paste0("Null Hypothesis: ", reactive_values$h0))
-  output$h0_message_intu = renderText(paste0("Null Hypothesis: ", reactive_values$h0))
+  output$h0_message_intu = renderText(paste0("Initial / current belief: ", reactive_values$h0))
   
   output$h1_message = renderText(paste0("Alternative Hypothesis: ", reactive_values$h1))
-  output$h1_message_intu = renderText(paste0("Alternative Hypothesis: ", reactive_values$h1))
+  output$h1_message_intu = renderText(paste0("Alternative belief: ", reactive_values$h1_intu))
   
   output$conclusion = renderText(reactive_values$conclusion)
   
@@ -139,6 +139,7 @@ server <- function(input, output) {
                reactive_values$h0 = paste0("The Hamming distance between the test sequence and the reference sequence follows a ", distribution, " distribution with single independent mutation probability, ", single_mutation_probability, ", and ", nchar(test_sequence), " trials.")
                
                reactive_values$h1 = paste0("The Hamming distance between the test sequence and the reference sequence does not follow a ", distribution, " distribution with single independent mutation probability, ", single_mutation_probability, ", and ", nchar(test_sequence), " trials.")
+               reactive_values$h1_intu = "The initial / current belief is wrong"
                
                reactive_values$conclusion = paste0("Conclusion: ", conclusion, " the Null Hypothesis")
                
