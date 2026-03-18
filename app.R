@@ -19,7 +19,10 @@ ui <- page_fluid(
   layout_columns(
   card(
     
-    card_header("Results intuitively phrased")
+    card_header("Results intuitively phrased"),
+    
+    textOutput("run_complete_message_intu"),
+
     
   ),
   
@@ -68,7 +71,10 @@ server <- function(input, output) {
   
   # Print messages
   output$test_sequence = renderText(paste0("Test sequence: ", reactive_values$test_sequence))
+  
   output$run_complete_message = renderText(reactive_values$run_complete_message)
+  output$run_complete_message_intu = renderText(reactive_values$run_complete_message)
+  
   output$p_value_message = renderText(reactive_values$p_value)
   output$distribution = renderText(reactive_values$hamming_distance_distribution)
   output$single_mutation_probability = renderText(reactive_values$single_mutation_probability)
