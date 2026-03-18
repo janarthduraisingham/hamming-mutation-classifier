@@ -30,7 +30,8 @@ ui <- page_fluid(
     textOutput("h0_message_intu"),
     textOutput("h1_message_intu"),
     textOutput("test_statistic_message_intu"),
-    textOutput("p_value_message_intu")
+    textOutput("p_value_message_intu"),
+    textOutput("conclusion_message_intu")
 
     
   ),
@@ -48,7 +49,7 @@ ui <- page_fluid(
     textOutput("h1_message"),
     textOutput("test_statistic_message"),
     textOutput("p_value_message"),
-    textOutput("conclusion")
+    textOutput("conclusion_message")
   )
   )
 )
@@ -95,7 +96,8 @@ server <- function(input, output) {
   output$h1_message = renderText(paste0("Alternative Hypothesis: ", reactive_values$h1))
   output$h1_message_intu = renderText(paste0("Alternative belief: ", reactive_values$h1_intu))
   
-  output$conclusion = renderText(reactive_values$conclusion)
+  output$conclusion_message = renderText(paste0("Conclusion: ", reactive_values$conclusion))
+  output$conclusion_message_intu = renderText(paste0("Conclusion: ", reactive_values$conclusion))
   
   output$sequence_length_message = renderText(paste0("Sequence length: ", reactive_values$sequence_length))
   output$sequence_length_message_intu = renderText(paste0("Sequence length: ", reactive_values$sequence_length))
@@ -141,7 +143,7 @@ server <- function(input, output) {
                reactive_values$h1 = paste0("The Hamming distance between the test sequence and the reference sequence does not follow a ", distribution, " distribution with single independent mutation probability, ", single_mutation_probability, ", and ", nchar(test_sequence), " trials.")
                reactive_values$h1_intu = "The initial / current belief is wrong\n\n"
                
-               reactive_values$conclusion = paste0("Conclusion: ", conclusion, " the Null Hypothesis")
+               reactive_values$conclusion = paste0(conclusion, " the Null Hypothesis")
                
                reactive_values$test_statistic = test_statistic
                
