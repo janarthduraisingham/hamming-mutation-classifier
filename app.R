@@ -6,7 +6,11 @@ ui <- page_fluid(
   titlePanel("Hamming Distance Mutation Classifier"),
   
   card(
-    card_header("Setup")
+    card_header("Setup"),
+    
+    textInput("test_sequence",
+              "Test Sequence",
+              placeholder = "e.g ATCGATCG")
   ),
   
   card(
@@ -62,7 +66,8 @@ server <- function(input, output) {
   
   reactive_values <- reactiveValues(run_complete_message = "Click Run button to produce results")
   
-  test_sequence <- 'AAAAAAAA'
+  #test_sequence <- 'AAAAAAAA'
+  #test_sequence = input$test_sequence
            
   reference_sequence <- 'ATGCATGC'
   
@@ -111,7 +116,7 @@ server <- function(input, output) {
                {
                
                # Run hypothesis test
-               hypothesis_test = hypothesis_test(test_sequence = test_sequence,
+               hypothesis_test = hypothesis_test(test_sequence = input$test_sequence,
                                          reference_sequence = reference_sequence,
                                          hamming_distance_function = hamming_distance,
                                          distribution = distribution,
@@ -134,20 +139,20 @@ server <- function(input, output) {
                
                reactive_values$single_mutation_probability = single_mutation_probability
                
-               reactive_values$test_sequence = test_sequence
+               reactive_values$test_sequence = input$test_sequence
 
                reactive_values$reference_sequence = reference_sequence
                
-               reactive_values$h0 = paste0("The Hamming distance between the test sequence and the reference sequence follows a ", distribution, " distribution with single independent mutation probability, ", single_mutation_probability, ", and ", nchar(test_sequence), " trials.")
+               reactive_values$h0 = paste0("The Hamming distance between the test sequence and the reference sequence follows a ", distribution, " distribution with single independent mutation probability, ", single_mutation_probability, ", and ", nchar(input$test_sequence), " trials.")
                
-               reactive_values$h1 = paste0("The Hamming distance between the test sequence and the reference sequence does not follow a ", distribution, " distribution with single independent mutation probability, ", single_mutation_probability, ", and ", nchar(test_sequence), " trials.")
+               reactive_values$h1 = paste0("The Hamming distance between the test sequence and the reference sequence does not follow a ", distribution, " distribution with single independent mutation probability, ", single_mutation_probability, ", and ", nchar(input$test_sequence), " trials.")
                reactive_values$h1_intu = "The initial / current belief is wrong\n\n"
                
                reactive_values$conclusion = paste0(conclusion, " the Null Hypothesis")
                
                reactive_values$test_statistic = test_statistic
                
-               reactive_values$sequence_length = nchar(test_sequence)
+               reactive_values$sequence_length = nchar(input$test_sequence)
                
                
                }
