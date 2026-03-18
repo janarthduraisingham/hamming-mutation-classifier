@@ -26,7 +26,7 @@ ui <- page_fluid(
   card(
     card_header("Results"),
     
-    textOutput("run_complete"),
+    textOutput("run_complete_message"),
     textOutput("test_sequence"),
     textOutput("reference_sequence"),
     textOutput("sequence_length"),
@@ -48,7 +48,7 @@ server <- function(input, output) {
   source("R/p_value.R")
   
   reactive_values <- reactiveValues(p_value = '',
-                                    run_complete = '',
+                                    run_complete_message = '',
                                     hamming_distance_distribution = '',
                                     single_mutation_probability = '',
                                     h0 = '',
@@ -68,7 +68,7 @@ server <- function(input, output) {
   
   # Print messages
   output$test_sequence = renderText(paste0("Test sequence: ", reactive_values$test_sequence))
-  output$run_complete = renderText(reactive_values$run_complete)
+  output$run_complete_message = renderText(reactive_values$run_complete_message)
   output$p_value_message = renderText(reactive_values$p_value)
   output$distribution = renderText(reactive_values$hamming_distance_distribution)
   output$single_mutation_probability = renderText(reactive_values$single_mutation_probability)
@@ -100,7 +100,7 @@ server <- function(input, output) {
                
                
                # Messages
-               reactive_values$run_complete = 'Hypothesis test complete'
+               reactive_values$run_complete_message = 'Hypothesis test complete'
                reactive_values$p_value = paste0("p value: ", format(p_value, scientific = F))
                reactive_values$hamming_distance_distribution = paste0("Hamming distance distribution: ", distribution)
                reactive_values$single_mutation_probability = paste0("Null Hypothesis single independent mutation probability: ", single_mutation_probability)
