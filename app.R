@@ -139,7 +139,7 @@ server <- function(input, output) {
                reactive_values$h0 = paste0("The Hamming distance between the test sequence and the reference sequence follows a ", distribution, " distribution with single independent mutation probability, ", single_mutation_probability, ", and ", nchar(test_sequence), " trials.")
                
                reactive_values$h1 = paste0("The Hamming distance between the test sequence and the reference sequence does not follow a ", distribution, " distribution with single independent mutation probability, ", single_mutation_probability, ", and ", nchar(test_sequence), " trials.")
-               reactive_values$h1_intu = "The initial / current belief is wrong"
+               reactive_values$h1_intu = "The initial / current belief is wrong\n\n"
                
                reactive_values$conclusion = paste0("Conclusion: ", conclusion, " the Null Hypothesis")
                
