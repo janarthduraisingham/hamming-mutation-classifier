@@ -22,7 +22,8 @@ ui <- page_fluid(
     card_header("Results intuitively phrased"),
     
     textOutput("run_complete_message_intu"),
-    textOutput("test_sequence_message_intu")
+    textOutput("test_sequence_message_intu"),
+    textOutput("reference_sequence_message_intu")
 
     
   ),
@@ -33,6 +34,7 @@ ui <- page_fluid(
     textOutput("run_complete_message"),
     textOutput("test_sequence_message"),
     textOutput("reference_sequence_message"),
+    
     textOutput("sequence_length"),
     textOutput("distribution"),
     textOutput("single_mutation_probability"),
@@ -51,7 +53,7 @@ server <- function(input, output) {
   source("R/hypothesis_test.R")
   source("R/p_value.R")
   
-  reactive_values <- reactiveValues()
+  reactive_values <- reactiveValues(run_complete_message = "Click Run button to produce results")
   
   test_sequence <- 'AAAAAAAA'
            
@@ -60,8 +62,13 @@ server <- function(input, output) {
   distribution = 'binomial'
   single_mutation_probability = 0.1
   
+  
   # Print messages
-  output$test_sequence_message = renderText(paste0("Test sequence: ", reactive_values$test_sequence_message))
+  output$test_sequence_message = renderText(paste0("Test sequence: ", reactive_values$test_sequence))
+  output$test_sequence_message_intu = renderText(paste0("Sequence we want to investigate: ", reactive_values$test_sequence))
+  
+  output$reference_sequence_message = renderText(paste0("Reference sequence: ", reactive_values$reference_sequence))
+  output$reference_sequence_message_intu = renderText(paste0("Sequence we want to compare against: ", reactive_values$reference_sequence))
   
   output$run_complete_message = renderText(reactive_values$run_complete_message)
   output$run_complete_message_intu = renderText(reactive_values$run_complete_message)
@@ -70,10 +77,10 @@ server <- function(input, output) {
   output$distribution = renderText(reactive_values$hamming_distance_distribution)
   output$single_mutation_probability = renderText(reactive_values$single_mutation_probability)
   
-  output$test_sequence_message = renderText(reactive_values$test_sequence_message)
-  output$test_sequence_message_intu = renderText(reactive_values$test_sequence_message_intu)
+  #output$test_sequence_message = renderText(reactive_values$test_sequence_message)
+  #output$test_sequence_message_intu = renderText(reactive_values$test_sequence_message_intu)
   
-  output$reference_sequence_message = renderText(reactive_values$reference_sequence_message)
+  #output$reference_sequence_message = renderText(reactive_values$reference_sequence_message)
   output$h0 = renderText(reactive_values$h0)
   output$h1 = renderText(reactive_values$h1)
   output$conclusion = renderText(reactive_values$conclusion)
@@ -108,10 +115,10 @@ server <- function(input, output) {
                
                reactive_values$single_mutation_probability = paste0("Null Hypothesis single independent mutation probability: ", single_mutation_probability)
                
-               reactive_values$test_sequence_message = paste0("Test sequence: ", test_sequence)
-               reactive_values$test_sequence_message_intu = paste0("Sequence we want to investigate: ", test_sequence)
+               reactive_values$test_sequence = test_sequence
+               #reactive_values$test_sequence_message_intu = paste0("Sequence we want to investigate: ", test_sequence)
                
-               reactive_values$reference_sequence_message = paste0("Reference sequence: ", reference_sequence)
+               reactive_values$reference_sequence = paste0("Reference sequence: ", reference_sequence)
                
                reactive_values$h0 = paste0("Null Hypothesis: The Hamming distance between the test sequence and the reference sequence follows a ", distribution, " distribution, with single independent mutation probability, ", single_mutation_probability)
                
