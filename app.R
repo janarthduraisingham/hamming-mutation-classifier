@@ -24,7 +24,8 @@ ui <- page_fluid(
     textOutput("run_complete_message_intu"),
     textOutput("test_sequence_message_intu"),
     textOutput("reference_sequence_message_intu"),
-    textOutput("sequence_length_message_intu")
+    textOutput("sequence_length_message_intu"),
+    textOutput("distribution_message_intu")
 
     
   ),
@@ -36,8 +37,7 @@ ui <- page_fluid(
     textOutput("test_sequence_message"),
     textOutput("reference_sequence_message"),
     textOutput("sequence_length_message"),
-    
-    textOutput("distribution"),
+    textOutput("distribution_message"),
     textOutput("single_mutation_probability"),
     textOutput("h0"),
     textOutput("h1"),
@@ -76,7 +76,9 @@ server <- function(input, output) {
   
   output$p_value_message = renderText(reactive_values$p_value)
   
-  output$distribution = renderText(reactive_values$hamming_distance_distribution)
+  output$distribution_message = renderText(paste0("Hamming distance distribution: ", reactive_values$hamming_distance_distribution))
+  output$distribution_message_intu = renderText(paste0("Hamming distance distribution: ", reactive_values$hamming_distance_distribution))
+
   
   output$single_mutation_probability = renderText(reactive_values$single_mutation_probability)
   
@@ -116,7 +118,7 @@ server <- function(input, output) {
                
                reactive_values$p_value = paste0("p value: ", format(p_value, scientific = F))
                
-               reactive_values$hamming_distance_distribution = paste0("Hamming distance distribution: ", distribution)
+               reactive_values$hamming_distance_distribution = distribution
                
                reactive_values$single_mutation_probability = paste0("Null Hypothesis single independent mutation probability: ", single_mutation_probability)
                
