@@ -23,7 +23,8 @@ ui <- page_fluid(
     
     textOutput("run_complete_message_intu"),
     textOutput("test_sequence_message_intu"),
-    textOutput("reference_sequence_message_intu")
+    textOutput("reference_sequence_message_intu"),
+    textOutput("sequence_length_message_intu")
 
     
   ),
@@ -34,8 +35,8 @@ ui <- page_fluid(
     textOutput("run_complete_message"),
     textOutput("test_sequence_message"),
     textOutput("reference_sequence_message"),
+    textOutput("sequence_length_message"),
     
-    textOutput("sequence_length"),
     textOutput("distribution"),
     textOutput("single_mutation_probability"),
     textOutput("h0"),
@@ -74,17 +75,21 @@ server <- function(input, output) {
   output$run_complete_message_intu = renderText(reactive_values$run_complete_message)
   
   output$p_value_message = renderText(reactive_values$p_value)
+  
   output$distribution = renderText(reactive_values$hamming_distance_distribution)
+  
   output$single_mutation_probability = renderText(reactive_values$single_mutation_probability)
   
-  #output$test_sequence_message = renderText(reactive_values$test_sequence_message)
-  #output$test_sequence_message_intu = renderText(reactive_values$test_sequence_message_intu)
-  
-  #output$reference_sequence_message = renderText(reactive_values$reference_sequence_message)
   output$h0 = renderText(reactive_values$h0)
+  
   output$h1 = renderText(reactive_values$h1)
+  
   output$conclusion = renderText(reactive_values$conclusion)
-  output$sequence_length = renderText(reactive_values$sequence_length)
+  
+  output$sequence_length_message = renderText(paste0("Sequence length: ", reactive_values$sequence_length))
+  output$sequence_length_message_intu = renderText(paste0("Sequence length: ", reactive_values$sequence_length))
+  
+  
   output$test_statistic = renderText(reactive_values$test_statistic)
   
   # Run Button
@@ -128,7 +133,7 @@ server <- function(input, output) {
                
                reactive_values$test_statistic = paste0("Test statistic: ", test_statistic)
                
-               reactive_values$sequence_length = paste0("Sequence length: ", nchar(test_sequence))
+               reactive_values$sequence_length = nchar(test_sequence)
                
                
                }
