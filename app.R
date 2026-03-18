@@ -26,7 +26,8 @@ ui <- page_fluid(
     textOutput("reference_sequence_message_intu"),
     textOutput("sequence_length_message_intu"),
     textOutput("distribution_message_intu"),
-    textOutput("single_mutation_probability_message_intu")
+    textOutput("single_mutation_probability_message_intu"),
+    textOutput("h0_message_intu")
 
     
   ),
@@ -40,7 +41,7 @@ ui <- page_fluid(
     textOutput("sequence_length_message"),
     textOutput("distribution_message"),
     textOutput("single_mutation_probability_message"),
-    textOutput("h0"),
+    textOutput("h0_message"),
     textOutput("h1"),
     textOutput("test_statistic"),
     textOutput("p_value_message"),
@@ -84,7 +85,8 @@ server <- function(input, output) {
   output$single_mutation_probability_message = renderText(paste0("Null Hypothesis single independent mutation probability: ", reactive_values$single_mutation_probability))
   output$single_mutation_probability_message_intu = renderText(paste0("Null Hypothesis single independent mutation probability: ", reactive_values$single_mutation_probability))
   
-  output$h0 = renderText(reactive_values$h0)
+  output$h0_message = renderText(paste0("Null Hypothesis: ", reactive_values$h0))
+  output$h0_message_intu = renderText(paste0("Null Hypothesis: ", reactive_values$h0))
   
   output$h1 = renderText(reactive_values$h1)
   
@@ -128,7 +130,7 @@ server <- function(input, output) {
 
                reactive_values$reference_sequence = reference_sequence
                
-               reactive_values$h0 = paste0("Null Hypothesis: The Hamming distance between the test sequence and the reference sequence follows a ", distribution, " distribution, with single independent mutation probability, ", single_mutation_probability)
+               reactive_values$h0 = paste0("The Hamming distance between the test sequence and the reference sequence follows a ", distribution, " distribution, with single independent mutation probability, ", single_mutation_probability)
                
                reactive_values$h1 = paste0("Alternative Hypothesis: The Hamming distance between the test sequence and the reference sequence does not follow a ", distribution, " distribution, with single independent mutation probability, ", single_mutation_probability)
                
