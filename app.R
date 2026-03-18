@@ -25,7 +25,8 @@ ui <- page_fluid(
     textOutput("test_sequence_message_intu"),
     textOutput("reference_sequence_message_intu"),
     textOutput("sequence_length_message_intu"),
-    textOutput("distribution_message_intu")
+    textOutput("distribution_message_intu"),
+    textOutput("single_mutation_probability_message_intu")
 
     
   ),
@@ -38,7 +39,7 @@ ui <- page_fluid(
     textOutput("reference_sequence_message"),
     textOutput("sequence_length_message"),
     textOutput("distribution_message"),
-    textOutput("single_mutation_probability"),
+    textOutput("single_mutation_probability_message"),
     textOutput("h0"),
     textOutput("h1"),
     textOutput("test_statistic"),
@@ -80,7 +81,8 @@ server <- function(input, output) {
   output$distribution_message_intu = renderText(paste0("Hamming distance distribution: ", reactive_values$hamming_distance_distribution))
 
   
-  output$single_mutation_probability = renderText(reactive_values$single_mutation_probability)
+  output$single_mutation_probability_message = renderText(paste0("Null Hypothesis single independent mutation probability: ", reactive_values$single_mutation_probability))
+  output$single_mutation_probability_message_intu = renderText(paste0("Null Hypothesis single independent mutation probability: ", reactive_values$single_mutation_probability))
   
   output$h0 = renderText(reactive_values$h0)
   
@@ -120,11 +122,10 @@ server <- function(input, output) {
                
                reactive_values$hamming_distance_distribution = distribution
                
-               reactive_values$single_mutation_probability = paste0("Null Hypothesis single independent mutation probability: ", single_mutation_probability)
+               reactive_values$single_mutation_probability = single_mutation_probability
                
                reactive_values$test_sequence = test_sequence
-               #reactive_values$test_sequence_message_intu = paste0("Sequence we want to investigate: ", test_sequence)
-               
+
                reactive_values$reference_sequence = reference_sequence
                
                reactive_values$h0 = paste0("Null Hypothesis: The Hamming distance between the test sequence and the reference sequence follows a ", distribution, " distribution, with single independent mutation probability, ", single_mutation_probability)
