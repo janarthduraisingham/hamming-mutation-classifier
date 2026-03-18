@@ -28,7 +28,8 @@ ui <- page_fluid(
     textOutput("distribution_message_intu"),
     textOutput("single_mutation_probability_message_intu"),
     textOutput("h0_message_intu"),
-    textOutput("h1_message_intu")
+    textOutput("h1_message_intu"),
+    textOutput("test_statistic_message_intu")
 
     
   ),
@@ -44,7 +45,7 @@ ui <- page_fluid(
     textOutput("single_mutation_probability_message"),
     textOutput("h0_message"),
     textOutput("h1_message"),
-    textOutput("test_statistic"),
+    textOutput("test_statistic_message"),
     textOutput("p_value_message"),
     textOutput("conclusion")
   )
@@ -98,7 +99,8 @@ server <- function(input, output) {
   output$sequence_length_message_intu = renderText(paste0("Sequence length: ", reactive_values$sequence_length))
   
   
-  output$test_statistic = renderText(reactive_values$test_statistic)
+  output$test_statistic_message = renderText(paste0("Test statistic: ", reactive_values$test_statistic))
+  output$test_statistic_message_intu = renderText(paste0("Hamming distance (no. of differences): ", reactive_values$test_statistic))
   
   # Run Button
   observeEvent(input$run,
@@ -138,7 +140,7 @@ server <- function(input, output) {
                
                reactive_values$conclusion = paste0("Conclusion: ", conclusion, " the Null Hypothesis")
                
-               reactive_values$test_statistic = paste0("Test statistic: ", test_statistic)
+               reactive_values$test_statistic = test_statistic
                
                reactive_values$sequence_length = nchar(test_sequence)
                
