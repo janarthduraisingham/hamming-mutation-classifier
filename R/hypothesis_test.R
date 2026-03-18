@@ -52,6 +52,7 @@ hypothesis_test <- function(test_sequence,
   cat("Conclusion:\n")
   cat("\t", conclusion, "\n\n")
 
-  return(p_value)
+  return(list('p_value' = p_value,
+              'test_statistic' = hamming_distance))
   
 }

@@ -34,6 +34,7 @@ ui <- page_fluid(
     textOutput("single_mutation_probability"),
     textOutput("h0"),
     textOutput("h1"),
+    textOutput("test_statistic"),
     textOutput("p_value_message"),
     textOutput("conclusion")
   )
@@ -55,7 +56,8 @@ server <- function(input, output) {
                                     test_sequence = '',
                                     reference_seqeunce = '',
                                     sequence_length = '',
-                                    conclusion = '')
+                                    conclusion = '',
+                                    test_statistic = '')
   
   test_sequence <- 'AAAAAAAA'
            
@@ -76,17 +78,21 @@ server <- function(input, output) {
   output$h1 = renderText(reactive_values$h1)
   output$conclusion = renderText(reactive_values$conclusion)
   output$sequence_length = renderText(reactive_values$sequence_length)
+  output$test_statistic = renderText(reactive_values$test_statistic)
   
   # Run Button
   observeEvent(input$run,
                {
                
                # Run hypothesis test
-               p_value = hypothesis_test(test_sequence = test_sequence,
+               hypothesis_test = hypothesis_test(test_sequence = test_sequence,
                                          reference_sequence = reference_sequence,
                                          hamming_distance_function = hamming_distance,
                                          distribution = distribution,
                                          single_mutation_probability = single_mutation_probability)
+               
+               p_value = hypothesis_test$p_value
+               test_statistic = hypothesis_test$test_statistic
                
                if (p_value < 0.05) {
                  conclusion = 'Reject'
@@ -103,6 +109,7 @@ server <- function(input, output) {
                reactive_values$h0 = paste0("Null Hypothesis: The Hamming distance between the test sequence and the reference sequence follows a ", distribution, " distribution, with single independent mutation probability, ", single_mutation_probability)
                reactive_values$h1 = paste0("Alternative Hypothesis: The Hamming distance between the test sequence and the reference sequence does not follow a ", distribution, " distribution, with single independent mutation probability, ", single_mutation_probability)
                reactive_values$conclusion = paste0("Conclusion: ", conclusion, " the Null Hypothesis")
+               reactive_values$test_statistic = paste0("Test statistic: ", test_statistic)
                reactive_values$sequence_length = paste0("Sequence length: ", nchar(test_sequence))
                
                
