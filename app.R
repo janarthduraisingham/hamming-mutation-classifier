@@ -8,6 +8,8 @@ ui <- page_fluid(
   card(
     card_header("Setup"),
     
+    layout_columns(
+    
     textInput("test_sequence",
               "Test Sequence",
               placeholder = "e.g. ATCGATCG"),
@@ -15,6 +17,8 @@ ui <- page_fluid(
     textInput("reference_sequence",
               "Reference sequence",
               placeholder = "e.g. ATCGATCG")
+    
+    )
     
   ),
   
