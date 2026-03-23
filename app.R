@@ -10,7 +10,12 @@ ui <- page_fluid(
     
     textInput("test_sequence",
               "Test Sequence",
-              placeholder = "e.g ATCGATCG")
+              placeholder = "e.g. ATCGATCG"),
+    
+    textInput("reference_sequence",
+              "Reference sequence",
+              placeholder = "e.g. ATCGATCG")
+    
   ),
   
   card(
