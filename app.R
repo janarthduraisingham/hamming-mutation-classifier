@@ -18,7 +18,11 @@ ui <- page_fluid(
               "Reference sequence",
               placeholder = "e.g. ATCGATCG")
     
-    )
+    ),
+    
+    textInput("bernoulli_prob",
+              "Independent single mutation probability",
+              placeholder = "e.g. 0.5")
     
   ),
   
