@@ -74,7 +74,7 @@ server <- function(input, output) {
   #test_sequence <- 'AAAAAAAA'
   #test_sequence = input$test_sequence
            
-  reference_sequence <- 'ATGCATGC'
+  #reference_sequence <- 'ATGCATGC'
   
   distribution = 'binomial'
   single_mutation_probability = 0.1
@@ -122,7 +122,7 @@ server <- function(input, output) {
                
                # Run hypothesis test
                hypothesis_test = hypothesis_test(test_sequence = input$test_sequence,
-                                         reference_sequence = reference_sequence,
+                                         reference_sequence = input$reference_sequence,
                                          hamming_distance_function = hamming_distance,
                                          distribution = distribution,
                                          single_mutation_probability = single_mutation_probability)
@@ -148,7 +148,7 @@ server <- function(input, output) {
                
                reactive_values$test_sequence = input$test_sequence
 
-               reactive_values$reference_sequence = reference_sequence
+               reactive_values$reference_sequence = input$reference_sequence
                
                reactive_values$h0 = paste0("The Hamming distance between the test sequence and the reference sequence follows a ", distribution, " distribution with single independent mutation probability, ", single_mutation_probability, ", and ", nchar(input$test_sequence), " trials.")
                
