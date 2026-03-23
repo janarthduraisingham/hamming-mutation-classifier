@@ -3,7 +3,7 @@ library(bslib)
 
 ui <- page_fluid(
   
-  titlePanel("Hamming Distance Mutation Classifier"),
+  titlePanel("Hamming Distance Mutation Hypothesis Test"),
   
   card(
     card_header("Setup"),
