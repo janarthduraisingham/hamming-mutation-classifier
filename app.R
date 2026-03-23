@@ -8,6 +8,8 @@ ui <- page_fluid(
   card(
     card_header("Setup"),
     
+    layout_columns(
+    
     textInput("test_sequence",
               "Test Sequence",
               placeholder = "e.g. ATCGATCG"),
@@ -15,6 +17,12 @@ ui <- page_fluid(
     textInput("reference_sequence",
               "Reference sequence",
               placeholder = "e.g. ATCGATCG")
+    
+    ),
+    
+    numericInput("bernoulli_prob",
+              "Independent single mutation probability",
+              value = 0.1)
     
   ),
   
@@ -77,7 +85,7 @@ server <- function(input, output) {
   #reference_sequence <- 'ATGCATGC'
   
   distribution = 'binomial'
-  single_mutation_probability = 0.1
+  #single_mutation_probability = 0.1
   
   
   # Print messages
@@ -125,7 +133,7 @@ server <- function(input, output) {
                                          reference_sequence = input$reference_sequence,
                                          hamming_distance_function = hamming_distance,
                                          distribution = distribution,
-                                         single_mutation_probability = single_mutation_probability)
+                                         single_mutation_probability = input$bernoulli_prob)
                
                p_value = hypothesis_test$p_value
                test_statistic = hypothesis_test$test_statistic
@@ -144,15 +152,15 @@ server <- function(input, output) {
                
                reactive_values$hamming_distance_distribution = distribution
                
-               reactive_values$single_mutation_probability = single_mutation_probability
+               reactive_values$single_mutation_probability = input$bernoulli_prob
                
                reactive_values$test_sequence = input$test_sequence
 
                reactive_values$reference_sequence = input$reference_sequence
                
-               reactive_values$h0 = paste0("The Hamming distance between the test sequence and the reference sequence follows a ", distribution, " distribution with single independent mutation probability, ", single_mutation_probability, ", and ", nchar(input$test_sequence), " trials.")
+               reactive_values$h0 = paste0("The Hamming distance between the test sequence and the reference sequence follows a ", distribution, " distribution with single independent mutation probability, ", input$bernoulli_prob, ", and ", nchar(input$test_sequence), " trials.")
                
-               reactive_values$h1 = paste0("The Hamming distance between the test sequence and the reference sequence does not follow a ", distribution, " distribution with single independent mutation probability, ", single_mutation_probability, ", and ", nchar(input$test_sequence), " trials.")
+               reactive_values$h1 = paste0("The Hamming distance between the test sequence and the reference sequence does not follow a ", distribution, " distribution with single independent mutation probability, ", input$bernoulli_prob, ", and ", nchar(input$test_sequence), " trials.")
                reactive_values$h1_intu = "The initial / current belief is wrong\n\n"
                
                reactive_values$conclusion = paste0(conclusion, " the Null Hypothesis")
