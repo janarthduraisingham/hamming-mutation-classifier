@@ -127,7 +127,9 @@ server <- function(input, output) {
                
                if (p_value < 0.05) {
                  conclusion = 'Reject'
-               } else {'Do not reject'}
+               } else {
+                 conclusion = 'Do not reject'
+                 }
                
                
                # Messages
