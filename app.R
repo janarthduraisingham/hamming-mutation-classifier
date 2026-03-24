@@ -84,6 +84,7 @@ server <- function(input, output) {
   source("R/hypothesis_test.R")
   source("R/p_value.R")
   source("R/hamming_distance_distribution.R")
+  source("R/hamming_distance_cumulative_distribution.R")
   
   reactive_values <- reactiveValues(run_complete_message = "Click Run button to produce results")
   
