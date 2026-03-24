@@ -86,7 +86,8 @@ ui <- page_fluid(
     numericInput("sig_level",
                  "Extreme threshold",
                  value = 0.95),
-    plotOutput("hamming_distance_cumulative_distribution_plot")
+    plotOutput("hamming_distance_cumulative_distribution_plot"),
+    plotOutput("hamming_distance_p_value_plot")
   ),
   
   card(
@@ -141,6 +142,7 @@ server <- function(input, output) {
   source("R/p_value.R")
   source("R/hamming_distance_distribution.R")
   source("R/hamming_distance_cumulative_distribution.R")
+  source("R/hamming_distance_p_value_graph.R")
   
   reactive_values <- reactiveValues(run_complete_message = "Click Run button to produce results")
   
@@ -157,6 +159,15 @@ server <- function(input, output) {
     hamming_distance_cumulative_distribution_plotter(trials = nchar(input$reference_sequence),
                                           single_mutation_probability = input$bernoulli_prob,
                                           threshold = input$sig_level)
+    
+    
+  })
+  
+  output$hamming_distance_p_value_plot <- renderPlot({
+    hamming_distance_p_value_plotter(trials = nchar(input$reference_sequence),
+                                                     single_mutation_probability = input$bernoulli_prob,
+                                                     threshold = input$sig_level)
+    
   })
   
   # Print messages
