@@ -3,7 +3,57 @@ library(bslib)
 
 ui <- page_fluid(
   
-  titlePanel("Hamming Distance Mutation Hypothesis Test"),
+  titlePanel("Intuitive Hypothesis Testing"),
+  
+  card(
+    
+    card_header("Introduction"),
+    
+    h1("Hypothesis Testing is all about beliefs and extreme observations"),
+   
+    h2("If an observation is extreme, based on a belief about the world, we might feel compelled to rethink that belief"),
+   
+    p("\"Google maps' route is taking ages, this can't have been the fastest way\""),
+   
+    p("\"I don't think this is coke is diet\""),
+   
+    p("\"If my initial belief were true, the probability of seeing something at least as extreme as what I have just seen is so unlikely that I no longer believe my initial belief\""),
+    
+    h3("But, of course, we can never know for sure")
+    
+  ),
+  
+  card(
+    
+    card_header("The Hypothesis Test"),
+    
+    h2("Hypothesis testing jargon:"),
+    
+    h3("Null Hypothesis: the initial belief"),
+    h3("Test Statistic: the observation itself"),
+    h3("p Value: the probability of seeing something at least that extreme, if the initial belief were true"),
+    h3("Significance Level: how unlikely the observation needs to be for us to reject the belief")
+    
+  ),
+  
+  card(
+    
+    card_header("DNA and the Hamming Distance"),
+    
+    h2("We want to judge whether a given sequence of DNA is a mutated version of a known sequence, or a different sequence completely"),
+    
+    p("DNA sequence: A literal sequence of A's, T's, G's, and C's, in any order"),
+    p("Mutation: When a DNA sequence gets copied, some letters may be copied incorrectly, according to some biological probability"),
+    p("Hamming Distance: The number of positions in which two sequences differ"),
+    
+    h3("The Hamming Distance between ATGC and ATGG is 1"),
+    h3("The Hamming Distance between ATGC and ATGC is 0"),
+    h3("The Hamming Distance between ATGC and CGTG is 4"),
+    
+    h2("A large Hamming Distance suggests different DNA, rather than a mutation")
+    
+    
+  ),
   
   card(
     card_header("Setup"),

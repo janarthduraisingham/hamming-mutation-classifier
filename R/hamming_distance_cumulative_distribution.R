@@ -11,14 +11,14 @@ hamming_distance_cumulative_distribution_plotter <- function(trials,
   
   df = data.frame(list(mutations = x, probability = y))
   
-  ggplot(df, aes(x = mutations, y = probability)) +
+  ggplot(df, aes(x = mutations + 1, y = probability)) +
     geom_bar(stat = 'identity', position = 'dodge') +
     theme_classic() +
-    labs(title = "Hamming Distance Cumulative Probability Distribution:\n(Probability Hamming Distance is at most, x)",
-         subtitle = paste0("Trials: ", trials, "\nSingle mutation probability: ", single_mutation_probability),
+    labs(title = "Probability that Hamming Distance < x",
+         subtitle = paste0("Trials (length of sequence): ", trials, "\nSingle mutation probability: ", single_mutation_probability),
          x = "Hamming distance (Number of mutations)",
          y = "Cumulative Probability") +
-    scale_x_continuous(breaks = seq(0, trials, by = 1)) +
+    scale_x_continuous(breaks = seq(0, trials+1, by = 1)) +
     scale_y_continuous(breaks = seq(0, 1, by = 0.05)) +
     geom_hline(yintercept = threshold, color = "red")
 }
