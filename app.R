@@ -6,6 +6,12 @@ ui <- page_fluid(
   titlePanel("Hamming Distance Mutation Hypothesis Test"),
   
   card(
+    
+    card_header("Introduction")
+    
+  ),
+  
+  card(
     card_header("Setup"),
     
     layout_columns(
