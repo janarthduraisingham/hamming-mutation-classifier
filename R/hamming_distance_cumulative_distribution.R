@@ -15,7 +15,7 @@ hamming_distance_cumulative_distribution_plotter <- function(trials,
     geom_bar(stat = 'identity', position = 'dodge') +
     theme_classic() +
     labs(title = "Hamming Distance Cumulative Probability Distribution:\n(Probability Hamming Distance is at most, x)",
-         subtitle = paste0("Trials: ", trials, "\nSingle mutation probability: ", single_mutation_probability),
+         subtitle = paste0("Trials: (length of sequence)", trials, "\nSingle mutation probability: ", single_mutation_probability),
          x = "Hamming distance (Number of mutations)",
          y = "Cumulative Probability") +
     scale_x_continuous(breaks = seq(0, trials, by = 1)) +

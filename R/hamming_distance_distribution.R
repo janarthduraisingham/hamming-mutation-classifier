@@ -14,7 +14,7 @@ hamming_distance_distribution_plotter <- function(trials,
     geom_bar(stat = 'identity', position = 'dodge') +
     theme_classic() +
     labs(title = "Hamming Distance Probability Distribution",
-         subtitle = paste0("Trials: ", trials, "\nSingle mutation probability: ", single_mutation_probability),
+         subtitle = paste0("Trials: (length of sequence)", trials, "\nSingle mutation probability: ", single_mutation_probability),
          x = "Hamming distance (Number of mutations)",
          y = "Probability") +
     scale_x_continuous(breaks = seq(0, trials, by = 1)) +
