@@ -27,6 +27,12 @@ ui <- page_fluid(
   ),
   
   card(
+    
+    card_header("Visualisations")
+    
+  ),
+  
+  card(
     card_header("Run Hypothesis Test"),
     
     actionButton("run", "Run")
