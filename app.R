@@ -105,7 +105,8 @@ server <- function(input, output) {
   
   output$hamming_distance_cumulative_distribution_plot <- renderPlot({
     hamming_distance_cumulative_distribution_plotter(trials = nchar(input$reference_sequence),
-                                          single_mutation_probability = input$bernoulli_prob)
+                                          single_mutation_probability = input$bernoulli_prob,
+                                          threshold = input$sig_level)
   })
   
   # Print messages
