@@ -1,7 +1,8 @@
 library(tidyverse)
 
 hamming_distance_cumulative_distribution_plotter <- function(trials,
-                                                  single_mutation_probability){
+                                                  single_mutation_probability,
+                                                  threshold){
   
   x = seq(0, trials)
   y = pbinom(x,
@@ -18,7 +19,8 @@ hamming_distance_cumulative_distribution_plotter <- function(trials,
          x = "Hamming distance (Number of mutations)",
          y = "Cumulative Probability") +
     scale_x_continuous(breaks = seq(0, trials, by = 1)) +
-    scale_y_continuous(breaks = seq(0, 1, by = 0.05))
+    scale_y_continuous(breaks = seq(0, 1, by = 0.05)) +
+    geom_hline(yintercept = threshold, color = "red")
 }
 
 
