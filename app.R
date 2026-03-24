@@ -30,7 +30,12 @@ ui <- page_fluid(
   card(
     
     card_header("Visualisations"),
+    
     plotOutput("hamming_distance_distribution_plot"),
+    
+    numericInput("sig_level",
+                 "Extreme threshold",
+                 value = 0.95),
     plotOutput("hamming_distance_cumulative_distribution_plot")
   ),
   
