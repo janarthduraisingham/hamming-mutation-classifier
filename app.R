@@ -30,7 +30,8 @@ ui <- page_fluid(
   card(
     
     card_header("Visualisations"),
-    plotOutput("hamming_distance_distribution_plot")
+    plotOutput("hamming_distance_distribution_plot"),
+    plotOutput("hamming_distance_cumulative_distribution_plot")
   ),
   
   card(
@@ -94,6 +95,11 @@ server <- function(input, output) {
   # Visualisations
   output$hamming_distance_distribution_plot <- renderPlot({
     hamming_distance_distribution_plotter(trials = nchar(input$reference_sequence),
+                                          single_mutation_probability = input$bernoulli_prob)
+  })
+  
+  output$hamming_distance_cumulative_distribution_plot <- renderPlot({
+    hamming_distance_cumulative_distribution_plotter(trials = nchar(input$reference_sequence),
                                           single_mutation_probability = input$bernoulli_prob)
   })
   
