@@ -3,7 +3,7 @@ library(tidyverse)
 hamming_distance_distribution_plotter <- function(trials,
                                                   single_mutation_probability){
   
-  x = seq(1:n)
+  x = seq(0, n)
   y = dbinom(x,
              size = trials,
              prob = single_mutation_probability)
@@ -16,13 +16,12 @@ hamming_distance_distribution_plotter <- function(trials,
     labs(title = "Hamming Distance Probability Distribution",
          subtitle = paste0("Trials: ", trials, "\nSingle mutation probability: ", single_mutation_probability),
          x = "Hamming distance",
-         y = "Probability")
+         y = "Probability") +
+    scale_x_continuous(breaks = seq(0, trials, by = 1))
   
   
 }
 
-hamming_distance_distribution_plotter(trials = 8,
-                                      single_mutation_probability = 0.1)
 
 
   

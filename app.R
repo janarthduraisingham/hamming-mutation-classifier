@@ -80,9 +80,9 @@ ui <- page_fluid(
 
 server <- function(input, output) {
   
-  source("R/hamming_distance.R")
-  source("R/hypothesis_test.R")
-  source("R/p_value.R")
+  #source("R/hamming_distance.R")
+  #source("R/hypothesis_test.R")
+  #source("R/p_value.R")
   
   reactive_values <- reactiveValues(run_complete_message = "Click Run button to produce results")
   
