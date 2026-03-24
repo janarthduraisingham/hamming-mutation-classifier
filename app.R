@@ -16,14 +16,21 @@ ui <- page_fluid(
     
     textInput("reference_sequence",
               "Reference sequence",
-              placeholder = "e.g. ATCGATCG")
+              value = "ATCGATCG")
     
     ),
     
     numericInput("bernoulli_prob",
               "Independent single mutation probability",
-              value = 0.1)
+              value = 0.1,
+              step = 0.1)
     
+  ),
+  
+  card(
+    
+    card_header("Visualisations"),
+    plotOutput("hamming_distance_distribution_plot")
   ),
   
   card(
@@ -76,17 +83,18 @@ server <- function(input, output) {
   source("R/hamming_distance.R")
   source("R/hypothesis_test.R")
   source("R/p_value.R")
+  source("R/hamming_distance_distribution.R")
   
   reactive_values <- reactiveValues(run_complete_message = "Click Run button to produce results")
   
-  #test_sequence <- 'AAAAAAAA'
-  #test_sequence = input$test_sequence
-           
-  #reference_sequence <- 'ATGCATGC'
-  
   distribution = 'binomial'
-  #single_mutation_probability = 0.1
+
   
+  # Visualisations
+  output$hamming_distance_distribution_plot <- renderPlot({
+    hamming_distance_distribution_plotter(trials = nchar(input$reference_sequence),
+                                          single_mutation_probability = input$bernoulli_prob)
+  })
   
   # Print messages
   output$test_sequence_message = renderText(paste0("Test sequence: ", reactive_values$test_sequence))
