@@ -87,14 +87,8 @@ server <- function(input, output) {
   
   reactive_values <- reactiveValues(run_complete_message = "Click Run button to produce results")
   
-  #test_sequence <- 'AAAAAAAA'
-  #test_sequence = input$test_sequence
-           
-  #reference_sequence <- 'ATGCATGC'
-  
   distribution = 'binomial'
-  #single_mutation_probability = 0.1
-  
+
   
   # Visualisations
   output$hamming_distance_distribution_plot <- renderPlot({
