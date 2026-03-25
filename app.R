@@ -85,7 +85,8 @@ ui <- page_fluid(
     
     numericInput("sig_level",
                  "Extreme threshold",
-                 value = 0.95),
+                 value = 0.95,
+                 step = 0.01),
     plotOutput("hamming_distance_cumulative_distribution_plot"),
     plotOutput("hamming_distance_p_value_plot")
   ),
@@ -220,12 +221,13 @@ server <- function(input, output) {
                                          reference_sequence = input$reference_sequence,
                                          hamming_distance_function = hamming_distance,
                                          distribution = distribution,
-                                         single_mutation_probability = input$bernoulli_prob)
+                                         single_mutation_probability = input$bernoulli_prob,
+                                         sig_level = 1-input$sig_level)
                
                p_value = hypothesis_test$p_value
                test_statistic = hypothesis_test$test_statistic
                
-               if (p_value < 0.05) {
+               if (p_value < 1-input$sig_level) {
                  conclusion = 'Reject'
                } else {
                  conclusion = 'Do not reject'

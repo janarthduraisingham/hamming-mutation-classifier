@@ -5,7 +5,8 @@ hypothesis_test <- function(test_sequence,
                             hamming_distance_function,
                             p_value_function = p_value,
                             distribution = 'binomial',
-                            single_mutation_probability = 0.1) {
+                            single_mutation_probability = 0.1,
+                            sig_level) {
   
   cat("Assumptions:\n")
   cat("\tThe probability of mutation at a given position is constant\n\tand independent of the mutation / non-mutation of other positions in the sequence.\n\n")
@@ -39,7 +40,7 @@ hypothesis_test <- function(test_sequence,
   cat("i.e. p value:\n")
   cat("\t", p_value, "\n\n")
   
-  if (p_value < 0.05) {
+  if (p_value < sig_level) {
     
     conclusion = "Since the proability of observing a result at least extreme as this is less than 5%\nwe reject the null hypothesis"
     
