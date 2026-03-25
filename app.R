@@ -111,6 +111,7 @@ ui <- page_fluid(
     textOutput("h0_message_intu"),
     textOutput("h1_message_intu"),
     textOutput("test_statistic_message_intu"),
+    textOutput("sig_level_message_intu"),
     textOutput("p_value_message_intu"),
     textOutput("conclusion_message_intu")
 
@@ -129,6 +130,7 @@ ui <- page_fluid(
     textOutput("h0_message"),
     textOutput("h1_message"),
     textOutput("test_statistic_message"),
+    textOutput("sig_level_message"),
     textOutput("p_value_message"),
     textOutput("conclusion_message")
   )
@@ -206,6 +208,9 @@ server <- function(input, output) {
   output$test_statistic_message = renderText(paste0("Test statistic: ", reactive_values$test_statistic))
   output$test_statistic_message_intu = renderText(paste0("Hamming distance (no. of differences): ", reactive_values$test_statistic))
   
+  output$sig_level_message = renderText(paste0("Significance level: ", reactive_values$sig_level))
+  output$sig_level_message_intu = renderText(paste0("Extremeness threshold to reject initial belief: ", reactive_values$sig_level))
+  
   # Run Button
   observeEvent(input$run,
                {
@@ -251,6 +256,7 @@ server <- function(input, output) {
                
                reactive_values$sequence_length = nchar(input$test_sequence)
                
+               reactive_values$sig_level = 1 - input$sig_level
                
                }
   )
