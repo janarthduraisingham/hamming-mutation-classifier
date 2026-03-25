@@ -15,7 +15,7 @@ ui <- page_fluid(
    
     p("\"Google maps' route is taking ages, this can't have been the fastest way\""),
    
-    p("\"I don't think this is coke is diet\""),
+    p("\"I don't think this coke is diet\""),
    
     p("\"If my initial belief were true, the probability of seeing something at least as extreme as what I have just seen is so unlikely that I no longer believe my initial belief\""),
     
