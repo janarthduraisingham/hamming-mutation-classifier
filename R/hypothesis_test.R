@@ -1,5 +1,4 @@
-# Perform hypothesis test
-
+# Perform hypothesis test by calling p_value() and assigning conclusion by comparing p value to significance level 
 hypothesis_test <- function(test_sequence,
                             reference_sequence,
                             hamming_distance_function,

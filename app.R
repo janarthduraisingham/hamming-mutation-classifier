@@ -1,5 +1,6 @@
 library(shiny)
 library(bslib)
+library(tidyverse)
 
 ui <- page_fluid(
   
@@ -149,15 +150,18 @@ server <- function(input, output) {
   
   reactive_values <- reactiveValues(run_complete_message = "Click Run button to produce results")
   
+  # hard code parameter - perhaps add more distribution options later
   distribution = 'binomial'
 
   
-  # Visualisations
+  ### Visualisations
+  # Hammming distance probability distribution
   output$hamming_distance_distribution_plot <- renderPlot({
     hamming_distance_distribution_plotter(trials = nchar(input$reference_sequence),
                                           single_mutation_probability = input$bernoulli_prob)
   })
   
+  # Hamming distance cumulative probability distribution
   output$hamming_distance_cumulative_distribution_plot <- renderPlot({
     hamming_distance_cumulative_distribution_plotter(trials = nchar(input$reference_sequence),
                                           single_mutation_probability = input$bernoulli_prob,
@@ -166,6 +170,7 @@ server <- function(input, output) {
     
   })
   
+  # p value against test statistic bar chart
   output$hamming_distance_p_value_plot <- renderPlot({
     hamming_distance_p_value_plotter(trials = nchar(input$reference_sequence),
                                                      single_mutation_probability = input$bernoulli_prob,
@@ -173,7 +178,7 @@ server <- function(input, output) {
     
   })
   
-  # Print messages
+  # Print messages to UI
   output$test_sequence_message = renderText(paste0("Test sequence: ", reactive_values$test_sequence))
   output$test_sequence_message_intu = renderText(paste0("Sequence we want to investigate: ", reactive_values$test_sequence))
   
@@ -227,6 +232,7 @@ server <- function(input, output) {
                p_value = hypothesis_test$p_value
                test_statistic = hypothesis_test$test_statistic
                
+               # Compute hypothesis test result
                if (p_value < 1-input$sig_level) {
                  conclusion = 'Reject'
                } else {
@@ -234,7 +240,7 @@ server <- function(input, output) {
                  }
                
                
-               # Messages
+               # Load hypothesis test results into reactive variables for printing to UI
                reactive_values$run_complete_message = 'Hypothesis test complete'
                
                reactive_values$p_value = format(p_value, scientific = F)

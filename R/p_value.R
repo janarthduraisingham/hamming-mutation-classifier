@@ -1,4 +1,4 @@
-# Function to get p value of hamming distance based on distribution
+# Function to get p value of hamming distance test statistic, based on distribution
 p_value <- function(distribution = 'binomial',
                     test_statistic,
                     sequence_length,

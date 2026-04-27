@@ -1,5 +1,4 @@
-library(tidyverse)
-
+# Plot the cumulative distribution of the Hamming distance, based on sequence length (trials) and probability of single mutation
 hamming_distance_cumulative_distribution_plotter <- function(trials,
                                                   single_mutation_probability,
                                                   threshold){
