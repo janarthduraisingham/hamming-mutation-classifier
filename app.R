@@ -177,7 +177,7 @@ server <- function(input, output) {
     
   })
   
-  # Print messages
+  # Print messages to UI
   output$test_sequence_message = renderText(paste0("Test sequence: ", reactive_values$test_sequence))
   output$test_sequence_message_intu = renderText(paste0("Sequence we want to investigate: ", reactive_values$test_sequence))
   
@@ -231,6 +231,7 @@ server <- function(input, output) {
                p_value = hypothesis_test$p_value
                test_statistic = hypothesis_test$test_statistic
                
+               # Compute hypothesis test result
                if (p_value < 1-input$sig_level) {
                  conclusion = 'Reject'
                } else {
@@ -238,7 +239,7 @@ server <- function(input, output) {
                  }
                
                
-               # Messages
+               # Load hypothesis test results into reactive variables for printing to UI
                reactive_values$run_complete_message = 'Hypothesis test complete'
                
                reactive_values$p_value = format(p_value, scientific = F)
