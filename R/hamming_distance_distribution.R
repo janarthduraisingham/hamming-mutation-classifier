@@ -1,10 +1,9 @@
-library(tidyverse)
-
+# Plot the distribution of the Hamming distance, based on sequence length (trials) and probability of single mutation
 hamming_distance_distribution_plotter <- function(trials,
                                                   single_mutation_probability){
   
-  x = seq(0, trials)
-  y = dbinom(x,
+  x = seq(0, trials) # x axis
+  y = dbinom(x, # y axis
              size = trials,
              prob = single_mutation_probability)
   
