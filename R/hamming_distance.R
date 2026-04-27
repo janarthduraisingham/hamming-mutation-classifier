@@ -1,6 +1,5 @@
-library(tidyverse)
-
-# Function to take two sequences and return hamming distance
+# Function to take two sequences and return hamming distance 
+# Hamming distance: number of positions in which two sequences differ
 hamming_distance <- function(seq_1, seq_2) {
   
   # Convert string to list of elements
