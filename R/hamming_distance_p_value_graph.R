@@ -1,15 +1,14 @@
-library(tidyverse)
-
+# Plot a graph of p value against Hamming distance, based on sequence length (trials) and probability of single mutation
 hamming_distance_p_value_plotter <- function(trials,
                                                   single_mutation_probability,
                                                   threshold){
   
-  x = seq(0, trials)
-  y = pbinom(x,
+  x = seq(0, trials) # x axis
+  y = pbinom(x, # y axis
              size = trials,
              prob = single_mutation_probability)
   
-  df = data.frame(list(mutations = x, probability = 1-y))
+  df = data.frame(list(mutations = x, probability = 1-y)) 
   
   ggplot(df, aes(x = mutations + 1, y = probability)) +
     geom_bar(stat = 'identity', position = 'dodge') +
