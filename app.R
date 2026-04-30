@@ -85,7 +85,7 @@ ui <- page_fluid(
     plotOutput("hamming_distance_distribution_plot"),
     
     numericInput("sig_level",
-                 "Extreme threshold",
+                 "Threshold for test statistic to be considered extreme (1 - significance level)",
                  value = 0.95,
                  step = 0.01),
     plotOutput("hamming_distance_cumulative_distribution_plot"),
