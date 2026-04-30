@@ -32,7 +32,7 @@ ui <- page_fluid(
     
     h3("Null Hypothesis: the initial belief"),
     h3("Test Statistic: the observation itself"),
-    h3("p Value: the probability of seeing something at least that extreme, if the initial belief were true"),
+    h3("p-value: the probability of seeing something at least that extreme, if the initial belief were true"),
     h3("Significance Level: how unlikely the observation needs to be for us to reject the belief")
     
   ),
